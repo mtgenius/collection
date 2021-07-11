@@ -1,0 +1,54 @@
+{
+  "name": "@mtgenius/collection",
+  "version": "0.1.0",
+  "author": "Charles Stover <collection@mtgeni.us>",
+  "description": "A Magic: The Gathering collection manager",
+  "homepage": "https://mtgenius.github.io/collection",
+  "license": "MIT",
+  "private": true,
+  "repository": "github:mtgenius/collection",
+  "directories": {
+    "lib": "src"
+  },
+  "funding": {
+    "type": "individual",
+    "url": "https://github.com/sponsors/CharlesStover"
+  },
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "scripts": {
+    "build": "react-scripts build",
+    "eslint": "eslint src",
+    "start": "react-scripts start",
+    "test": "eslint src && jest",
+    "test-watch": "jest --coverage=false --watch",
+    "update": "node scripts/update.mjs"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.0.0",
+    "@testing-library/user-event": "^13.1.9",
+    "@types/jest": "^26.0.24",
+    "@types/node": "^16.3.1",
+    "@types/react": "^17.0.14",
+    "@types/react-dom": "^17.0.9",
+    "@types/testing-library__react-hooks": "^4.0.0",
+    "@typescript-eslint/eslint-plugin": "^4.28.2",
+    "@typescript-eslint/parser": "^4.28.2",
+    "@yarnpkg/pnpify": "^3.0.0-rc.10",
+    "eslint": "^7.30.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "jest": "^27.0.6",
+    "prettier": "^2.3.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "^4.0.3",
+    "ts-jest": "^27.0.3",
+    "tslib": "^2.3.0",
+    "typescript": "^4.3.5"
+  }
+}
