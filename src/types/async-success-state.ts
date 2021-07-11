@@ -1,5 +1,5 @@
 export default interface AsyncSuccessState<T> {
-  data: T;
-  error?: undefined;
-  loading: false;
+  readonly data: T;
+  readonly error?: undefined;
+  readonly loading: false;
 }

@@ -1,5 +1,5 @@
 export default interface AsyncErrorState {
-  data?: undefined;
-  error: Error;
-  loading: false;
+  readonly data?: undefined;
+  readonly error: Error;
+  readonly loading: false;
 }

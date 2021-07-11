@@ -202,6 +202,12 @@
         "trailingUnderscore": "allow"
       },
       {
+        "format": ["camelCase", "PascalCase"],
+        "leadingUnderscore": "forbid",
+        "selector": "function",
+        "trailingUnderscore": "forbid"
+      },
+      {
         "format": ["camelCase", "UPPER_CASE"],
         "leadingUnderscore": "allow",
         "selector": "variable",
@@ -209,11 +215,9 @@
       },
       {
         "format": ["PascalCase"],
-        "selector": "typeLike"
-      },
-      {
-        "format": ["camelCase", "PascalCase"],
-        "selector": "function"
+        "leadingUnderscore": "forbid",
+        "selector": ["enumMember", "typeLike"],
+        "trailingUnderscore": "forbid"
       }
     ],
     "@typescript-eslint/no-invalid-void-type": [

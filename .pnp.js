@@ -55,6 +55,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:7.24.0"],
             ["eslint-plugin-react-hooks", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:4.2.0"],
             ["jest", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:27.0.6"],
+            ["lazy-i18n", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:2.0.9"],
             ["prettier", "npm:2.3.2"],
             ["react", "npm:17.0.2"],
             ["react-bootstrap", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:1.6.1"],
@@ -5204,6 +5205,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-react", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:7.24.0"],
             ["eslint-plugin-react-hooks", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:4.2.0"],
             ["jest", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:27.0.6"],
+            ["lazy-i18n", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:2.0.9"],
             ["prettier", "npm:2.3.2"],
             ["react", "npm:17.0.2"],
             ["react-bootstrap", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:1.6.1"],
@@ -15878,6 +15880,32 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["last-call-webpack-plugin", "npm:3.0.0"],
             ["lodash", "npm:4.17.21"],
             ["webpack-sources", "npm:1.4.3"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["lazy-i18n", [
+        ["npm:2.0.9", {
+          "packageLocation": "./.yarn/cache/lazy-i18n-npm-2.0.9-f7a0ffeeef-5778586dac.zip/node_modules/lazy-i18n/",
+          "packageDependencies": [
+            ["lazy-i18n", "npm:2.0.9"]
+          ],
+          "linkType": "SOFT",
+        }],
+        ["virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:2.0.9", {
+          "packageLocation": "./.yarn/$$virtual/lazy-i18n-virtual-0224da4381/0/cache/lazy-i18n-npm-2.0.9-f7a0ffeeef-5778586dac.zip/node_modules/lazy-i18n/",
+          "packageDependencies": [
+            ["lazy-i18n", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:2.0.9"],
+            ["@types/react", "npm:17.0.14"],
+            ["@types/react-dom", "npm:17.0.9"],
+            ["react", "npm:17.0.2"],
+            ["react-dom", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:17.0.2"]
+          ],
+          "packagePeers": [
+            "@types/react-dom",
+            "@types/react",
+            "react-dom",
+            "react"
           ],
           "linkType": "HARD",
         }]
