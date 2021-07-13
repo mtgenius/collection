@@ -3,6 +3,7 @@ import AwsuiDarkMode from 'awsui-dark-mode';
 import { I18nProvider } from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import { StrictMode, useState } from 'react';
+import CardsCards from '../../components/cards-cards';
 import Header from '../../components/header';
 import LoadCards from '../../components/load-cards';
 import Metadata from '../../components/metadata';
@@ -51,6 +52,7 @@ export default function App({
             MetadataType): ReactElement => (
               <Wrapper header={<Header lastUpdated={date} />}>
                 <LoadCards
+                  Component={CardsCards}
                   cardNamesSize={cardNamesSize}
                   fetchCardNames={fetchCardNames}
                   fetchSetCodes={fetchSetCodes}

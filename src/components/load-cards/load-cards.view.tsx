@@ -1,11 +1,18 @@
 import Alert from '@awsui/components-react/alert';
 import Box from '@awsui/components-react/box';
 import I18n from 'lazy-i18n';
-import type { ReactElement } from 'react';
+import type { ComponentType, ReactElement } from 'react';
+import type MagicCard from '../../types/magic-card';
 import useLoadCards from './load-cards.hook';
 import mapErrorToListItem from './load-cards.util.map-error-to-list-item';
 
+interface ComponentProps {
+  readonly children: readonly MagicCard[];
+}
+
 interface Props {
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  readonly Component: ComponentType<ComponentProps>;
   readonly cardNamesSize: number;
   readonly fetchCardNames: () => Promise<string[]>;
   readonly fetchSetCodes: () => Promise<string[]>;
@@ -23,6 +30,8 @@ const NONE = 0;
 const SINGLE = 1;
 
 export default function LoadCards({
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  Component,
   cardNamesSize,
   fetchCardNames,
   fetchSetCodes,
@@ -32,16 +41,17 @@ export default function LoadCards({
   setIndexCardIndexMultiverseIdsSize,
   setNamesSize,
 }: Props): ReactElement {
-  const { bytesLoaded, bytesTotal, errors, handleRetryClick } = useLoadCards({
-    cardNamesSize,
-    fetchCardNames,
-    fetchSetCodes,
-    fetchSetIndexCardIndexMultiverseIds,
-    fetchSetNames,
-    setCodesSize,
-    setIndexCardIndexMultiverseIdsSize,
-    setNamesSize,
-  });
+  const { bytesLoaded, bytesTotal, cards, errors, handleRetryClick } =
+    useLoadCards({
+      cardNamesSize,
+      fetchCardNames,
+      fetchSetCodes,
+      fetchSetIndexCardIndexMultiverseIds,
+      fetchSetNames,
+      setCodesSize,
+      setIndexCardIndexMultiverseIdsSize,
+      setNamesSize,
+    });
 
   if (errors.length > NONE) {
     return (
@@ -68,13 +78,13 @@ export default function LoadCards({
     );
   }
 
-  // if (bytesLoaded < bytesTotal) {
-  return (
-    <Box>
-      Loaded {bytesLoaded} of {bytesTotal} bytes
-    </Box>
-  );
-  // }
+  if (bytesLoaded < bytesTotal) {
+    return (
+      <Box>
+        Loaded {bytesLoaded} of {bytesTotal} bytes
+      </Box>
+    );
+  }
 
-  // return <div>Done</div>;
+  return <Component>{cards}</Component>;
 }

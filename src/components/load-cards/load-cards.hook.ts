@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo } from 'react';
 import useAsyncState from '../../hooks/use-async-state';
+import type MagicCard from '../../types/magic-card';
 import NOOP from '../../utils/noop';
 
 interface Props {
@@ -18,6 +19,7 @@ interface Props {
 interface State {
   readonly bytesLoaded: number;
   readonly bytesTotal: number;
+  readonly cards: MagicCard[];
   readonly errors: Error[];
   readonly handleRetryClick: () => void;
 }
@@ -52,11 +54,17 @@ export default function useLoadCards({
     initSetIndexCardIndexMultiverseIdsState,
   ]);
 
-  const isCardNamesLoaded: boolean = typeof cardNamesState.data !== 'undefined';
-  const isSetCodesLoaded: boolean = typeof setCodesState.data !== 'undefined';
+  const cardNames: string[] | undefined = cardNamesState.data;
+  const multiverseIds:
+    | Record<number | string, Record<number | string, number>>
+    | undefined = setIndexCardIndexMultiverseIdsState.data;
+  const setCodes: string[] | undefined = setCodesState.data;
+  const setNames: string[] | undefined = setNamesState.data;
+  const isCardNamesLoaded: boolean = typeof cardNames !== 'undefined';
+  const isSetCodesLoaded: boolean = typeof setCodes !== 'undefined';
   const isSetIndexCardIndexMultiverseIdsLoaded: boolean =
-    typeof setIndexCardIndexMultiverseIdsState.data !== 'undefined';
-  const isSetNamesLoaded: boolean = typeof setNamesState.data !== 'undefined';
+    typeof multiverseIds !== 'undefined';
+  const isSetNamesLoaded: boolean = typeof setNames !== 'undefined';
   return {
     bytesLoaded: useMemo((): number => {
       let newBytesLoaded = 0;
@@ -89,6 +97,41 @@ export default function useLoadCards({
       setCodesSize +
       setIndexCardIndexMultiverseIdsSize +
       setNamesSize,
+
+    cards: useMemo((): MagicCard[] => {
+      const newCards: MagicCard[] = [];
+      if (typeof cardNames === 'undefined') {
+        return newCards;
+      }
+      if (typeof multiverseIds === 'undefined') {
+        return newCards;
+      }
+      if (typeof setCodes === 'undefined') {
+        return newCards;
+      }
+      if (typeof setNames === 'undefined') {
+        return newCards;
+      }
+
+      for (const [setIndexStr, cardsRecord] of Object.entries(multiverseIds)) {
+        const setIndex: number = parseInt(setIndexStr, 10);
+        const setCode: string = setCodes[setIndex];
+        const setName: string = setNames[setIndex];
+        for (const [cardIndexStr, multiverseId] of Object.entries(
+          cardsRecord,
+        )) {
+          const cardIndex: number = parseInt(cardIndexStr, 10);
+          newCards.push({
+            cardName: cardNames[cardIndex],
+            multiverseId,
+            setCode,
+            setName,
+          });
+        }
+      }
+
+      return newCards;
+    }, [cardNames, multiverseIds, setCodes, setNames]),
 
     errors: useMemo((): Error[] => {
       const newErrors: Error[] = [];
