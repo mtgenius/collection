@@ -1,0 +1,80 @@
+import Alert from '@awsui/components-react/alert';
+import Box from '@awsui/components-react/box';
+import I18n from 'lazy-i18n';
+import type { ReactElement } from 'react';
+import useLoadCards from './load-cards.hook';
+import mapErrorToListItem from './load-cards.util.map-error-to-list-item';
+
+interface Props {
+  readonly cardNamesSize: number;
+  readonly fetchCardNames: () => Promise<string[]>;
+  readonly fetchSetCodes: () => Promise<string[]>;
+  readonly fetchSetNames: () => Promise<string[]>;
+  readonly setCodesSize: number;
+  readonly setIndexCardIndexMultiverseIdsSize: number;
+  readonly setNamesSize: number;
+  readonly fetchSetIndexCardIndexMultiverseIds: () => Promise<
+    Record<number | string, Record<number | string, number>>
+  >;
+}
+
+const FIRST = 0;
+const NONE = 0;
+const SINGLE = 1;
+
+export default function LoadCards({
+  cardNamesSize,
+  fetchCardNames,
+  fetchSetCodes,
+  fetchSetIndexCardIndexMultiverseIds,
+  fetchSetNames,
+  setCodesSize,
+  setIndexCardIndexMultiverseIdsSize,
+  setNamesSize,
+}: Props): ReactElement {
+  const { bytesLoaded, bytesTotal, errors, handleRetryClick } = useLoadCards({
+    cardNamesSize,
+    fetchCardNames,
+    fetchSetCodes,
+    fetchSetIndexCardIndexMultiverseIds,
+    fetchSetNames,
+    setCodesSize,
+    setIndexCardIndexMultiverseIdsSize,
+    setNamesSize,
+  });
+
+  if (errors.length > NONE) {
+    return (
+      <Alert
+        buttonText={<I18n>Retry</I18n>}
+        dismissible={false}
+        onButtonClick={handleRetryClick}
+        type="error"
+        visible
+        header={
+          errors.length !== SINGLE ? (
+            <I18n>There were errors loading the card data.</I18n>
+          ) : (
+            <I18n>There was an error loading the card data.</I18n>
+          )
+        }
+      >
+        {errors.length !== SINGLE ? (
+          <ul>{errors.map(mapErrorToListItem)}</ul>
+        ) : (
+          <>{errors[FIRST].message}</>
+        )}
+      </Alert>
+    );
+  }
+
+  // if (bytesLoaded < bytesTotal) {
+  return (
+    <Box>
+      Loaded {bytesLoaded} of {bytesTotal} bytes
+    </Box>
+  );
+  // }
+
+  // return <div>Done</div>;
+}

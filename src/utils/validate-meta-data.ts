@@ -1,9 +1,9 @@
-import type MetaData from '../types/meta-data';
+import type Metadata from '../types/metadata';
 import isMetaData from '../utils/is-meta-data';
 
-export default function validateMetaData(value: unknown): MetaData {
+export default function validateMetaData(value: unknown): Metadata {
   if (!isMetaData(value)) {
-    throw new Error('Value is not meta data.');
+    throw new Error('Expected meta data.');
   }
 
   return value;

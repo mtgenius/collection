@@ -1,7 +1,7 @@
-import type MetaData from '../types/meta-data';
+import type Metadata from '../types/metadata';
 import isRecord from '../utils/is-record';
 
-export default function isMetaData(value: unknown): value is MetaData {
+export default function isMetaData(value: unknown): value is Metadata {
   return (
     isRecord(value) &&
     Object.prototype.hasOwnProperty.call(value, 'cardKingdomIdsSize') &&

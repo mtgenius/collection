@@ -9,14 +9,12 @@ const setIndexCardIndexMultiverseIds = {};
 const setNames = [];
 const tcgplayerProductIds = {};
 
-for (
-  const {
-    cards,
-    code: setCode,
-    isOnlineOnly,
-    name: setName,
-  } of Object.values(input.data)
-) {
+for (const {
+  cards,
+  code: setCode,
+  isOnlineOnly,
+  name: setName,
+} of Object.values(input.data)) {
   if (isOnlineOnly) {
     continue;
   }
@@ -25,17 +23,15 @@ for (
   setCodes.push(setCode);
   setNames.push(setName);
 
-  for (
-    const {
-      availability,
-      identifiers: {
-        cardKingdomId: cardKingdomIdStr,
-        multiverseId: multiverseIdStr,
-        tcgplayerProductId: tcgplayerProductIdStr,
-      },
-      name: cardName,
-    } of cards
-  ) {
+  for (const {
+    availability,
+    identifiers: {
+      cardKingdomId: cardKingdomIdStr,
+      multiverseId: multiverseIdStr,
+      tcgplayerProductId: tcgplayerProductIdStr,
+    },
+    name: cardName,
+  } of cards) {
     if (availability.indexOf('paper') === -1) {
       continue;
     }
@@ -90,7 +86,7 @@ fs.writeFileSync('./src/data/set-codes.json', setCodesStr);
 fs.writeFileSync('./src/data/set-names.json', setNamesStr);
 
 fs.writeFileSync(
-  './src/data/set-index-code-index-multiverse-ids.json',
+  './src/data/set-index-card-index-multiverse-ids.json',
   setIndexCardIndexMultiverseIdsStr,
 );
 
@@ -101,13 +97,18 @@ fs.writeFileSync(
 
 fs.writeFileSync(
   './src/data/meta.json',
-  JSON.stringify({
-    cardKingdomIdsSize: cardKingdomIdsStr.length,
-    cardNamesSize: cardNamesStr.length,
-    date: input.meta.date,
-    setCodesSize: setCodesStr.length,
-    setIndexCardIndexMultiverseIdsSize: setIndexCardIndexMultiverseIdsStr.length,
-    setNamesSize: setNamesStr.length,
-    tcgplayerProductIdsSize: tcgplayerProductIdsStr.length,
-  }, null, 2),
+  JSON.stringify(
+    {
+      cardKingdomIdsSize: cardKingdomIdsStr.length,
+      cardNamesSize: cardNamesStr.length,
+      date: input.meta.date,
+      setCodesSize: setCodesStr.length,
+      setIndexCardIndexMultiverseIdsSize:
+        setIndexCardIndexMultiverseIdsStr.length,
+      setNamesSize: setNamesStr.length,
+      tcgplayerProductIdsSize: tcgplayerProductIdsStr.length,
+    },
+    null,
+    2,
+  ),
 );

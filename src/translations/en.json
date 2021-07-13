@@ -1,4 +1,8 @@
 {
+  "Last updated": "Last updated",
   "Loading metadata": "Loading metadata",
-  "There was an error loading the application metadata.": "There was an error loading the application metadata."
+  "Retry": "Retry",
+  "There was an error loading the application metadata.": "There was an error loading the application metadata.",
+  "There was an error loading the card data.": "There was an error loading the card data.",
+  "There were errors loading the card data.": "There were errors loading the card data."
 }

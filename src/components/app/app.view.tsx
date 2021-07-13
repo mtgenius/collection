@@ -1,28 +1,74 @@
+import '@awsui/global-styles/index.css';
+import AwsuiDarkMode from 'awsui-dark-mode';
 import { I18nProvider } from 'lazy-i18n';
 import type { ReactElement } from 'react';
 import { StrictMode, useState } from 'react';
-import Main from '../../components/main';
+import Header from '../../components/header';
+import LoadCards from '../../components/load-cards';
+import Metadata from '../../components/metadata';
+import Wrapper from '../../components/wrapper';
 import Locale from '../../constants/locale';
 import TRANSLATIONS from '../../constants/translations';
-import type MetaData from '../../types/meta-data';
+import type MetadataType from '../../types/metadata';
 import './app.scss';
 
 interface Props {
-  readonly fetchMetaData: () => Promise<MetaData>;
+  readonly fetchCardNames: () => Promise<string[]>;
+  readonly fetchMetadata: () => Promise<MetadataType>;
+  readonly fetchSetCodes: () => Promise<string[]>;
+  readonly fetchSetNames: () => Promise<string[]>;
+  readonly fetchSetIndexCardIndexMultiverseIds: () => Promise<
+    Record<number | string, Record<number | string, number>>
+  >;
 }
 
-export default function App({ fetchMetaData }: Props): ReactElement {
-  const [locale, setLocale] = useState(Locale.English);
+export default function App({
+  fetchCardNames,
+  fetchMetadata,
+  fetchSetCodes,
+  fetchSetIndexCardIndexMultiverseIds,
+  fetchSetNames,
+}: Props): ReactElement {
+  const [locale] = useState(Locale.English);
 
   return (
     <StrictMode>
-      <I18nProvider
-        fallbackLocale="en"
-        locale={locale}
-        translations={TRANSLATIONS}
-      >
-        <Main fetchMetaData={fetchMetaData} onLocaleChange={setLocale} />
-      </I18nProvider>
+      <AwsuiDarkMode root="body">
+        <I18nProvider
+          fallbackLocale="en"
+          locale={locale}
+          translations={TRANSLATIONS}
+        >
+          <Metadata fetchMetadata={fetchMetadata}>
+            {({
+              // cardKingdomIdsSize,
+              cardNamesSize,
+              date,
+              setCodesSize,
+              setIndexCardIndexMultiverseIdsSize,
+              setNamesSize,
+            }: // tcgplayerProductIdsSize,
+            MetadataType): ReactElement => (
+              <Wrapper header={<Header lastUpdated={date} />}>
+                <LoadCards
+                  cardNamesSize={cardNamesSize}
+                  fetchCardNames={fetchCardNames}
+                  fetchSetCodes={fetchSetCodes}
+                  fetchSetNames={fetchSetNames}
+                  setCodesSize={setCodesSize}
+                  setNamesSize={setNamesSize}
+                  fetchSetIndexCardIndexMultiverseIds={
+                    fetchSetIndexCardIndexMultiverseIds
+                  }
+                  setIndexCardIndexMultiverseIdsSize={
+                    setIndexCardIndexMultiverseIdsSize
+                  }
+                />
+              </Wrapper>
+            )}
+          </Metadata>
+        </I18nProvider>
+      </AwsuiDarkMode>
     </StrictMode>
   );
 }

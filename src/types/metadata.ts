@@ -1,4 +1,4 @@
-export default interface MetaData {
+export default interface Metadata {
   readonly cardKingdomIdsSize: number;
   readonly cardNamesSize: number;
   readonly date: string;

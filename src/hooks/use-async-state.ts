@@ -44,7 +44,7 @@ const reducer = <T>(
 
 export default function useAsyncState<T>(
   act: () => Promise<T>,
-): [AsyncState<T>, VoidFunction] {
+): [AsyncState<T>, () => Promise<void>] {
   const [state, dispatch] = useReducer<
     Reducer<AsyncState<T>, ErrorAction | InitAction | SuccessAction<T>>,
     null
@@ -52,21 +52,24 @@ export default function useAsyncState<T>(
 
   return [
     state,
-    useCallback((): void => {
-      dispatch({ type: 'INIT' });
-      act()
-        .then((data: T): void => {
-          dispatch({
-            data,
-            type: 'SUCCESS',
-          });
-        })
-        .catch((err: Readonly<Error>): void => {
-          dispatch({
-            error: err,
-            type: 'ERROR',
-          });
+    useCallback(async (): Promise<void> => {
+      const handleError = (err: Readonly<Error>): void => {
+        dispatch({
+          error: err,
+          type: 'ERROR',
         });
+      };
+
+      const handleSuccess = (data: T): void => {
+        dispatch({
+          data,
+          type: 'SUCCESS',
+        });
+      };
+
+      dispatch({ type: 'INIT' });
+
+      return act().then(handleSuccess).catch(handleError);
     }, [act]),
   ];
 }

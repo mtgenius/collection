@@ -1,9 +1,9 @@
-import type MetaData from '../types/meta-data';
+import type Metadata from '../types/metadata';
 import mapToDefault from '../utils/map-to-default';
 import validateDefault from '../utils/validate-default';
 import validateMetaData from '../utils/validate-meta-data';
 
-export default async function fetchMetaData(): Promise<MetaData> {
+export default async function fetchMetadata(): Promise<Metadata> {
   return import('../data/meta.json')
     .then(validateDefault)
     .then(mapToDefault)
