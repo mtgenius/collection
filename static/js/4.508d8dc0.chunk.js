@@ -1,0 +1,2 @@
+(this["webpackJsonp@mtgenius/collection"]=this["webpackJsonp@mtgenius/collection"]||[]).push([[4],{109:function(e){e.exports=JSON.parse('{"cardKingdomIdsSize":621188,"cardNamesSize":750244,"date":"2021-07-02","scryfallIdsSize":1998696,"setCodesSize":3517,"setIndexCardIndexMultiverseIdsSize":604975,"setNamesSize":12121,"tcgplayerProductIdsSize":618553}')}}]);
+//# sourceMappingURL=4.508d8dc0.chunk.js.map
