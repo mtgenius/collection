@@ -1,7 +1,7 @@
 language: node_js
 node_js: 14
 branches:
-  only: master
+  only: main
 cache:
   npm: false
   directories:
@@ -15,7 +15,7 @@ deploy:
   github-token:
     secure:
   on:
-    branch: master
+    branch: main
 install:
   - yarn
 script:
