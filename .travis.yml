@@ -5,7 +5,7 @@ branches:
 cache:
   npm: false
   directories:
-    - '.yarn/cache'
+  - ".yarn/cache"
 deploy:
   keep-history: true
   local-dir: build
@@ -13,10 +13,10 @@ deploy:
   skip-cleanup: true
   target-branch: gh-pages
   github-token:
-    secure:
+    secure: raKuSRF0e+wYfInWhuuZrAea7gXSHZ1KlAikMBpaGAj6JACGjbvo6ZngFhZSf/itgRW8Ml5GJPbXIhi6MLGutTbTWX1hsDXpLgVpwaF1HH7z59PbRLSTIzbUX/a//LhapwxXkPkm47Nw4mQh0xQIRguvzqepHHSZ/uITGb71suGYvaMKploDot/WN66S9JHsuL3SGbTvcFTnnWiwt+H32Ygblu4yBVw+dw/QdjwADDpFScLGoXS9LWbhjoyv8CSuINP8D+e152sOUZkkBnRENL8mqyVSnT1sWETw5ZyYBKFlVCrPTHz0XXUfz9Q3um2P4hT+89OPi9H2nX7wkh753dJMRidFylmM6j7xmSO/KtFSVQL62se1ddnK1mqzIEiKSiIwb015ahvi0QPLWMqgsTyJFSCYR/1Y7gfq793RsPxfN9OoNjPTe7qxwM6Gr3ZvoNz1VbHmLI99UAdNB3/5ZK8ctY4neTqsTmau81r0N7XySCOH78bzmR+PtqPMvxnEfnhVATeqX9mlwx2aEKAHg2hp5uu9uWbz6cfbxUFGeBtZASO+79dGdxidgPfcZFHWovZ1eBCQKZjWZcshQyBH9+x70clSa4I5AwYydBonXz06uav/6Nuuc0jrH0x7vqeDXAFQQRcEwQHX8T6UFUVJFQISNH6NHCZmnuGtDRQ+5Tg=
   on:
     branch: main
 install:
-  - yarn
+- yarn
 script:
-  - yarn build
+- yarn build
