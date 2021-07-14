@@ -5,6 +5,7 @@ interface Props {
   readonly alt?: string;
   readonly children: string;
   readonly className?: string;
+  readonly title?: string;
   readonly image:
     | 'art_crop'
     | 'border_crop'
@@ -19,6 +20,7 @@ export default function ScryfallImage({
   children: scryfallId,
   className,
   image,
+  title,
 }: Props): ReactElement {
   const { height, src, width } = useScryfallImage({ image, scryfallId });
 
@@ -28,6 +30,7 @@ export default function ScryfallImage({
       className={className}
       height={height}
       src={src}
+      title={title}
       width={width}
     />
   );

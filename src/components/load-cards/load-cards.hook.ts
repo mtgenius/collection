@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 import useAsyncState from '../../hooks/use-async-state';
 import type MagicCard from '../../types/magic-card';
 import NOOP from '../../utils/noop';
+import sortCards from './load-cards.util.sort-cards';
 
 interface Props {
   readonly cardNamesSize: number;
@@ -144,7 +145,7 @@ export default function useLoadCards({
         }
       }
 
-      return newCards;
+      return newCards.sort(sortCards);
     }, [cardNames, multiverseIds, scryfallIds, setCodes, setNames]),
 
     errors: useMemo((): Error[] => {

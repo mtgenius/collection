@@ -2,36 +2,53 @@ import Box from '@awsui/components-react/box';
 import Button from '@awsui/components-react/button';
 import Cards from '@awsui/components-react/cards';
 import Header from '@awsui/components-react/header';
-import Pagination from '@awsui/components-react/pagination';
 import TextFilter from '@awsui/components-react/text-filter';
 import SpaceBetween from '@awsui/components-react/space-between';
 import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
+import Pagination from '../../components/pagination';
 import type MagicCard from '../../types/magic-card';
-import CARD_DEFINITION from './cards-cards.constant.card-definition';
 import useCardsCards from './cards-cards.hook';
+import Empty from './cards-cards.view.empty';
 
 interface Props {
   readonly children: readonly Readonly<MagicCard>[];
 }
 
-const START = 0;
-const END = 10;
+const isItemDisabled = (): true => true;
 
-export default function CardsCards({ children }: Props): ReactElement {
-  const { selectedItems } = useCardsCards();
+export default function CardsCards({ children: cards }: Props): ReactElement {
+  const {
+    cardDefinition,
+    currentPageIndex,
+    filteringPlaceholder,
+    filteringText,
+    handleClearFilter,
+    handlePaginationChange,
+    handleTextFilterChange,
+    items,
+    pagesCount,
+    selectedItems,
+  } = useCardsCards(cards);
 
   return (
     <Box margin="l">
       <Cards
-        cardDefinition={CARD_DEFINITION}
-        items={children.slice(START, END)}
-        filter={<TextFilter filteringText="test" />}
-        pagination={<Pagination currentPageIndex={START} pagesCount={END} />}
+        cardDefinition={cardDefinition}
+        empty={<Empty onClearFilter={handleClearFilter} />}
+        isItemDisabled={isItemDisabled}
+        items={items}
         selectedItems={selectedItems}
         selectionType="multi"
+        stickyHeader
         trackBy="multiverseId"
-        empty={<>No cards matched your search.</>}
+        filter={
+          <TextFilter
+            filteringPlaceholder={filteringPlaceholder}
+            filteringText={filteringText}
+            onChange={handleTextFilterChange}
+          />
+        }
         header={
           <Header
             actions={
@@ -47,6 +64,13 @@ export default function CardsCards({ children }: Props): ReactElement {
           >
             <I18n>Cards</I18n>
           </Header>
+        }
+        pagination={
+          <Pagination
+            currentPageIndex={currentPageIndex}
+            onChange={handlePaginationChange}
+            pagesCount={pagesCount}
+          />
         }
       />
     </Box>
