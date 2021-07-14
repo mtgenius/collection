@@ -16,6 +16,7 @@ import './app.scss';
 interface Props {
   readonly fetchCardNames: () => Promise<string[]>;
   readonly fetchMetadata: () => Promise<MetadataType>;
+  readonly fetchScryfallIds: () => Promise<Record<string, string>>;
   readonly fetchSetCodes: () => Promise<string[]>;
   readonly fetchSetNames: () => Promise<string[]>;
   readonly fetchSetIndexCardIndexMultiverseIds: () => Promise<
@@ -26,6 +27,7 @@ interface Props {
 export default function App({
   fetchCardNames,
   fetchMetadata,
+  fetchScryfallIds,
   fetchSetCodes,
   fetchSetIndexCardIndexMultiverseIds,
   fetchSetNames,
@@ -45,6 +47,7 @@ export default function App({
               // cardKingdomIdsSize,
               cardNamesSize,
               date,
+              scryfallIdsSize,
               setCodesSize,
               setIndexCardIndexMultiverseIdsSize,
               setNamesSize,
@@ -55,8 +58,10 @@ export default function App({
                   Component={CardsCards}
                   cardNamesSize={cardNamesSize}
                   fetchCardNames={fetchCardNames}
+                  fetchScryfallIds={fetchScryfallIds}
                   fetchSetCodes={fetchSetCodes}
                   fetchSetNames={fetchSetNames}
+                  scryfallIdsSize={scryfallIdsSize}
                   setCodesSize={setCodesSize}
                   setNamesSize={setNamesSize}
                   fetchSetIndexCardIndexMultiverseIds={

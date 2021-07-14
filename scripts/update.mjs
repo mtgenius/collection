@@ -4,6 +4,7 @@ const input = JSON.parse(fs.readFileSync('./scripts/data/AllPrintings.json'));
 
 const cardKingdomIds = {};
 const cardNames = [];
+const scryfallIds = {};
 const setCodes = [];
 const setIndexCardIndexMultiverseIds = {};
 const setNames = [];
@@ -28,6 +29,7 @@ for (const {
     identifiers: {
       cardKingdomId: cardKingdomIdStr,
       multiverseId: multiverseIdStr,
+      scryfallId,
       tcgplayerProductId: tcgplayerProductIdStr,
     },
     name: cardName,
@@ -62,6 +64,10 @@ for (const {
       cardKingdomIds[multiverseId] = parseInt(cardKingdomIdStr, 10);
     }
 
+    if (scryfallId) {
+      scryfallIds[multiverseId] = scryfallId;
+    }
+
     if (tcgplayerProductIdStr) {
       tcgplayerProductIds[multiverseId] = parseInt(tcgplayerProductIdStr, 10);
     }
@@ -72,6 +78,7 @@ const cardKingdomIdsStr = JSON.stringify(cardKingdomIds, null, 0);
 const cardNamesStr = JSON.stringify(cardNames, null, 0);
 const setCodesStr = JSON.stringify(setCodes, null, 0);
 const setNamesStr = JSON.stringify(setNames, null, 0);
+const scryfallIdsStr = JSON.stringify(scryfallIds, null, 0);
 const tcgplayerProductIdsStr = JSON.stringify(tcgplayerProductIds, null, 0);
 
 const setIndexCardIndexMultiverseIdsStr = JSON.stringify(
@@ -84,6 +91,7 @@ fs.writeFileSync('./src/data/card-names.json', cardNamesStr);
 fs.writeFileSync('./src/data/card-kingdom-ids.json', cardKingdomIdsStr);
 fs.writeFileSync('./src/data/set-codes.json', setCodesStr);
 fs.writeFileSync('./src/data/set-names.json', setNamesStr);
+fs.writeFileSync('./src/data/scryfall-ids.json', scryfallIdsStr);
 
 fs.writeFileSync(
   './src/data/set-index-card-index-multiverse-ids.json',
@@ -96,12 +104,13 @@ fs.writeFileSync(
 );
 
 fs.writeFileSync(
-  './src/data/meta.json',
+  './src/data/metadata.json',
   JSON.stringify(
     {
       cardKingdomIdsSize: cardKingdomIdsStr.length,
       cardNamesSize: cardNamesStr.length,
       date: input.meta.date,
+      scryfallIdsSize: scryfallIdsStr.length,
       setCodesSize: setCodesStr.length,
       setIndexCardIndexMultiverseIdsSize:
         setIndexCardIndexMultiverseIdsStr.length,

@@ -4,7 +4,7 @@ import validateDefault from '../utils/validate-default';
 import validateMetaData from '../utils/validate-meta-data';
 
 export default async function fetchMetadata(): Promise<Metadata> {
-  return import('../data/meta.json')
+  return import('../data/metadata.json')
     .then(validateDefault)
     .then(mapToDefault)
     .then(validateMetaData);

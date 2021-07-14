@@ -6,8 +6,10 @@ import NOOP from '../../utils/noop';
 interface Props {
   readonly cardNamesSize: number;
   readonly fetchCardNames: () => Promise<string[]>;
+  readonly fetchScryfallIds: () => Promise<Record<string, string>>;
   readonly fetchSetCodes: () => Promise<string[]>;
   readonly fetchSetNames: () => Promise<string[]>;
+  readonly scryfallIdsSize: number;
   readonly setCodesSize: number;
   readonly setIndexCardIndexMultiverseIdsSize: number;
   readonly setNamesSize: number;
@@ -27,9 +29,11 @@ interface State {
 export default function useLoadCards({
   cardNamesSize,
   fetchCardNames,
+  fetchScryfallIds,
   fetchSetCodes,
   fetchSetIndexCardIndexMultiverseIds,
   fetchSetNames,
+  scryfallIdsSize,
   setCodesSize,
   setIndexCardIndexMultiverseIdsSize,
   setNamesSize,
@@ -37,6 +41,8 @@ export default function useLoadCards({
   const [cardNamesState, initCardNamesState] = useAsyncState(fetchCardNames);
   const [setCodesState, initSetCodesState] = useAsyncState(fetchSetCodes);
   const [setNamesState, initSetNamesState] = useAsyncState(fetchSetNames);
+  const [scryfallIdsState, initScryfallIdsState] =
+    useAsyncState(fetchScryfallIds);
   const [
     setIndexCardIndexMultiverseIdsState,
     initSetIndexCardIndexMultiverseIdsState,
@@ -44,11 +50,13 @@ export default function useLoadCards({
 
   useEffect((): void => {
     initCardNamesState().catch(NOOP);
+    initScryfallIdsState().catch(NOOP);
     initSetCodesState().catch(NOOP);
     initSetNamesState().catch(NOOP);
     initSetIndexCardIndexMultiverseIdsState().catch(NOOP);
   }, [
     initCardNamesState,
+    initScryfallIdsState,
     initSetCodesState,
     initSetNamesState,
     initSetIndexCardIndexMultiverseIdsState,
@@ -58,9 +66,11 @@ export default function useLoadCards({
   const multiverseIds:
     | Record<number | string, Record<number | string, number>>
     | undefined = setIndexCardIndexMultiverseIdsState.data;
+  const scryfallIds: Record<string, string> | undefined = scryfallIdsState.data;
   const setCodes: string[] | undefined = setCodesState.data;
   const setNames: string[] | undefined = setNamesState.data;
   const isCardNamesLoaded: boolean = typeof cardNames !== 'undefined';
+  const isScryfallIdsLoaded: boolean = typeof scryfallIds !== 'undefined';
   const isSetCodesLoaded: boolean = typeof setCodes !== 'undefined';
   const isSetIndexCardIndexMultiverseIdsLoaded: boolean =
     typeof multiverseIds !== 'undefined';
@@ -70,6 +80,9 @@ export default function useLoadCards({
       let newBytesLoaded = 0;
       if (isCardNamesLoaded) {
         newBytesLoaded += cardNamesSize;
+      }
+      if (isScryfallIdsLoaded) {
+        newBytesLoaded += scryfallIdsSize;
       }
       if (isSetCodesLoaded) {
         newBytesLoaded += setCodesSize;
@@ -84,9 +97,11 @@ export default function useLoadCards({
     }, [
       cardNamesSize,
       isCardNamesLoaded,
+      isScryfallIdsLoaded,
       isSetCodesLoaded,
       isSetIndexCardIndexMultiverseIdsLoaded,
       isSetNamesLoaded,
+      scryfallIdsSize,
       setCodesSize,
       setNamesSize,
       setIndexCardIndexMultiverseIdsSize,
@@ -94,22 +109,20 @@ export default function useLoadCards({
 
     bytesTotal:
       cardNamesSize +
+      scryfallIdsSize +
       setCodesSize +
       setIndexCardIndexMultiverseIdsSize +
       setNamesSize,
 
     cards: useMemo((): MagicCard[] => {
       const newCards: MagicCard[] = [];
-      if (typeof cardNames === 'undefined') {
-        return newCards;
-      }
-      if (typeof multiverseIds === 'undefined') {
-        return newCards;
-      }
-      if (typeof setCodes === 'undefined') {
-        return newCards;
-      }
-      if (typeof setNames === 'undefined') {
+      if (
+        typeof cardNames === 'undefined' ||
+        typeof multiverseIds === 'undefined' ||
+        typeof scryfallIds === 'undefined' ||
+        typeof setCodes === 'undefined' ||
+        typeof setNames === 'undefined'
+      ) {
         return newCards;
       }
 
@@ -124,6 +137,7 @@ export default function useLoadCards({
           newCards.push({
             cardName: cardNames[cardIndex],
             multiverseId,
+            scryfallId: scryfallIds[multiverseId],
             setCode,
             setName,
           });
@@ -131,12 +145,15 @@ export default function useLoadCards({
       }
 
       return newCards;
-    }, [cardNames, multiverseIds, setCodes, setNames]),
+    }, [cardNames, multiverseIds, scryfallIds, setCodes, setNames]),
 
     errors: useMemo((): Error[] => {
       const newErrors: Error[] = [];
       if (cardNamesState.error) {
         newErrors.push(cardNamesState.error);
+      }
+      if (scryfallIdsState.error) {
+        newErrors.push(scryfallIdsState.error);
       }
       if (setCodesState.error) {
         newErrors.push(setCodesState.error);
@@ -150,6 +167,7 @@ export default function useLoadCards({
       return newErrors;
     }, [
       cardNamesState.error,
+      scryfallIdsState.error,
       setCodesState.error,
       setIndexCardIndexMultiverseIdsState.error,
       setNamesState.error,
@@ -159,6 +177,9 @@ export default function useLoadCards({
       const inits: Promise<unknown>[] = [];
       if (cardNamesState.error) {
         inits.push(initCardNamesState());
+      }
+      if (scryfallIdsState.error) {
+        inits.push(initScryfallIdsState());
       }
       if (setCodesState.error) {
         inits.push(initSetCodesState());
@@ -173,9 +194,11 @@ export default function useLoadCards({
     }, [
       cardNamesState.error,
       initCardNamesState,
+      initScryfallIdsState,
       initSetCodesState,
       initSetIndexCardIndexMultiverseIdsState,
       initSetNamesState,
+      scryfallIdsState.error,
       setCodesState.error,
       setIndexCardIndexMultiverseIdsState.error,
       setNamesState.error,

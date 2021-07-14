@@ -15,8 +15,10 @@ interface Props {
   readonly Component: ComponentType<ComponentProps>;
   readonly cardNamesSize: number;
   readonly fetchCardNames: () => Promise<string[]>;
+  readonly fetchScryfallIds: () => Promise<Record<string, string>>;
   readonly fetchSetCodes: () => Promise<string[]>;
   readonly fetchSetNames: () => Promise<string[]>;
+  readonly scryfallIdsSize: number;
   readonly setCodesSize: number;
   readonly setIndexCardIndexMultiverseIdsSize: number;
   readonly setNamesSize: number;
@@ -34,9 +36,11 @@ export default function LoadCards({
   Component,
   cardNamesSize,
   fetchCardNames,
+  fetchScryfallIds,
   fetchSetCodes,
   fetchSetIndexCardIndexMultiverseIds,
   fetchSetNames,
+  scryfallIdsSize,
   setCodesSize,
   setIndexCardIndexMultiverseIdsSize,
   setNamesSize,
@@ -45,9 +49,11 @@ export default function LoadCards({
     useLoadCards({
       cardNamesSize,
       fetchCardNames,
+      fetchScryfallIds,
       fetchSetCodes,
       fetchSetIndexCardIndexMultiverseIds,
       fetchSetNames,
+      scryfallIdsSize,
       setCodesSize,
       setIndexCardIndexMultiverseIdsSize,
       setNamesSize,
