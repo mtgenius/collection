@@ -2,6 +2,7 @@ import type { NonCancelableCustomEvent } from '@awsui/components-react';
 import type { CardsProps } from '@awsui/components-react/cards';
 import type { PaginationProps } from '@awsui/components-react/pagination';
 import type { TextFilterProps } from '@awsui/components-react/text-filter';
+import download from 'downloadjs';
 import type { TranslateFunction } from 'lazy-i18n';
 import { useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo, useState } from 'react';
@@ -15,6 +16,7 @@ interface State {
   readonly filteringPlaceholder?: string;
   readonly filteringText: string;
   readonly handleClearFilter: () => void;
+  readonly handleExport: () => void;
   readonly items: readonly MagicCard[];
   readonly pagesCount: number;
   readonly selectedItems: readonly MagicCard[];
@@ -116,6 +118,18 @@ export default function useCardsCards(cards: readonly MagicCard[]): State {
     handleClearFilter: useCallback((): void => {
       setFilteringText('');
     }, [setFilteringText]),
+
+    handleExport: useCallback((): void => {
+      const newExport: Record<number, number> = {};
+      for (const [multiverseId, count] of collection.entries()) {
+        newExport[multiverseId] = count;
+      }
+      download(
+        JSON.stringify(newExport),
+        'mtgenius-collection.json',
+        'application/json',
+      );
+    }, [collection]),
 
     items: useMemo(
       (): readonly MagicCard[] => paginate(filteredItems),

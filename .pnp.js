@@ -50,6 +50,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.14.1"],
             ["@testing-library/react", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:12.0.0"],
             ["@testing-library/user-event", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:13.1.9"],
+            ["@types/downloadjs", "npm:1.4.2"],
             ["@types/jest", "npm:26.0.24"],
             ["@types/node", "npm:16.3.2"],
             ["@types/react", "npm:17.0.14"],
@@ -59,6 +60,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:4.28.3"],
             ["@yarnpkg/pnpify", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:3.0.0-rc.10"],
             ["awsui-dark-mode", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:1.0.4"],
+            ["downloadjs", "npm:1.4.7"],
             ["eslint", "npm:7.30.0"],
             ["eslint-config-prettier", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:8.3.0"],
             ["eslint-plugin-prettier", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:3.4.0"],
@@ -6784,6 +6786,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@testing-library/jest-dom", "npm:5.14.1"],
             ["@testing-library/react", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:12.0.0"],
             ["@testing-library/user-event", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:13.1.9"],
+            ["@types/downloadjs", "npm:1.4.2"],
             ["@types/jest", "npm:26.0.24"],
             ["@types/node", "npm:16.3.2"],
             ["@types/react", "npm:17.0.14"],
@@ -6793,6 +6796,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@typescript-eslint/parser", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:4.28.3"],
             ["@yarnpkg/pnpify", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:3.0.0-rc.10"],
             ["awsui-dark-mode", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:1.0.4"],
+            ["downloadjs", "npm:1.4.7"],
             ["eslint", "npm:7.30.0"],
             ["eslint-config-prettier", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:8.3.0"],
             ["eslint-plugin-prettier", "virtual:9bf17050710203c572ce3174ed8e27ccdcbf0d69e6c1ea25013114c264147f9c95f4e87a22b45185cc61e745dd6ff59c7c01a1d02147dd96ec064c3296a147d5#npm:3.4.0"],
@@ -7526,6 +7530,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@types/keyv", "npm:3.1.2"],
             ["@types/node", "npm:14.14.31"],
             ["@types/responselike", "npm:1.0.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["@types/downloadjs", [
+        ["npm:1.4.2", {
+          "packageLocation": "./.yarn/cache/@types-downloadjs-npm-1.4.2-b334a174da-b33b620f33.zip/node_modules/@types/downloadjs/",
+          "packageDependencies": [
+            ["@types/downloadjs", "npm:1.4.2"]
           ],
           "linkType": "HARD",
         }]
@@ -12639,6 +12652,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/dotenv-expand-npm-5.1.0-c3fff50eb5-b895c6220d.zip/node_modules/dotenv-expand/",
           "packageDependencies": [
             ["dotenv-expand", "npm:5.1.0"]
+          ],
+          "linkType": "HARD",
+        }]
+      ]],
+      ["downloadjs", [
+        ["npm:1.4.7", {
+          "packageLocation": "./.yarn/cache/downloadjs-npm-1.4.7-952a4ef987-8f897ffcb9.zip/node_modules/downloadjs/",
+          "packageDependencies": [
+            ["downloadjs", "npm:1.4.7"]
           ],
           "linkType": "HARD",
         }]

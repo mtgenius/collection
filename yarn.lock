@@ -3285,6 +3285,7 @@ __metadata:
     "@testing-library/jest-dom": ^5.14.1
     "@testing-library/react": ^12.0.0
     "@testing-library/user-event": ^13.1.9
+    "@types/downloadjs": ^1.4.2
     "@types/jest": ^26.0.24
     "@types/node": ^16.3.2
     "@types/react": ^17.0.14
@@ -3294,6 +3295,7 @@ __metadata:
     "@typescript-eslint/parser": ^4.28.3
     "@yarnpkg/pnpify": ^3.0.0-rc.10
     awsui-dark-mode: ^1.0.4
+    downloadjs: ^1.4.7
     eslint: ^7.30.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-prettier: ^3.4.0
@@ -3873,6 +3875,13 @@ __metadata:
     "@types/node": "*"
     "@types/responselike": "*"
   checksum: ea7ed6ef4447ed8d1c359e806c076573420ca46d401ae0cc8ae6366e4e9434d2eaf16200ee5f2a2c9c2b54ec5a9514185c9d7ee4e8f3a01adb3b7a1450dacc78
+  languageName: node
+  linkType: hard
+
+"@types/downloadjs@npm:^1.4.2":
+  version: 1.4.2
+  resolution: "@types/downloadjs@npm:1.4.2"
+  checksum: b33b620f334fb033c9617068e8af72c6291fede82d781d9cf13e6979402042e213dcca63611dcd362494b4fb891019f2c3a4ae941d89f39e8b5ef330d6a406d0
   languageName: node
   linkType: hard
 
@@ -8039,6 +8048,13 @@ __metadata:
   version: 8.2.0
   resolution: "dotenv@npm:8.2.0"
   checksum: 16cb89cbd7b98b053899b8aba8c5044c8fb61a2db8a81fe70360b75035fce5fed53bd7a34d772be717d0880c0321122a4c09423f518025e1b52d96791521b1a7
+  languageName: node
+  linkType: hard
+
+"downloadjs@npm:^1.4.7":
+  version: 1.4.7
+  resolution: "downloadjs@npm:1.4.7"
+  checksum: 8f897ffcb9b6d2702df0211447bdae11a5d75373691b07031011a7523b9a82275ef1f2dd0c14cd7a1d7a7ab7d7bae74d626bdca611ded4b9f20df2dbe88b5edc
   languageName: node
   linkType: hard
 

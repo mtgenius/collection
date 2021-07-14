@@ -24,6 +24,7 @@ export default function CardsCards({ children: cards }: Props): ReactElement {
     filteringPlaceholder,
     filteringText,
     handleClearFilter,
+    handleExport,
     handlePaginationChange,
     handleTextFilterChange,
     items,
@@ -56,7 +57,7 @@ export default function CardsCards({ children: cards }: Props): ReactElement {
                 <Button>
                   <I18n>Import</I18n>
                 </Button>
-                <Button variant="primary">
+                <Button onClick={handleExport} variant="primary">
                   <I18n>Export</I18n>
                 </Button>
               </SpaceBetween>
