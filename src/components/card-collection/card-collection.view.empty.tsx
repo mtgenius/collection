@@ -8,7 +8,7 @@ interface Props {
   readonly onClearFilter: () => void;
 }
 
-export default function CardsCardsEmpty({
+export default function CardCollectionEmpty({
   onClearFilter,
 }: Props): ReactElement {
   return (

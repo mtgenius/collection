@@ -8,6 +8,7 @@ import mapErrorToListItem from './load-cards.util.map-error-to-list-item';
 
 interface ComponentProps {
   readonly children: readonly MagicCard[];
+  readonly lastUpdated: string;
 }
 
 interface Props {
@@ -18,6 +19,7 @@ interface Props {
   readonly fetchScryfallIds: () => Promise<Record<string, string>>;
   readonly fetchSetCodes: () => Promise<string[]>;
   readonly fetchSetNames: () => Promise<string[]>;
+  readonly lastUpdated: string;
   readonly scryfallIdsSize: number;
   readonly setCodesSize: number;
   readonly setIndexCardIndexMultiverseIdsSize: number;
@@ -40,6 +42,7 @@ export default function LoadCards({
   fetchSetCodes,
   fetchSetIndexCardIndexMultiverseIds,
   fetchSetNames,
+  lastUpdated,
   scryfallIdsSize,
   setCodesSize,
   setIndexCardIndexMultiverseIdsSize,
@@ -92,5 +95,5 @@ export default function LoadCards({
     );
   }
 
-  return <Component>{cards}</Component>;
+  return <Component lastUpdated={lastUpdated}>{cards}</Component>;
 }

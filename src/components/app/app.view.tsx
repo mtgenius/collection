@@ -2,15 +2,14 @@ import '@awsui/global-styles/index.css';
 import AwsuiDarkMode from 'awsui-dark-mode';
 import { I18nProvider } from 'lazy-i18n';
 import type { ReactElement } from 'react';
-import { StrictMode, useState } from 'react';
-import CardsCards from '../../components/cards-cards';
-import Header from '../../components/header';
+import { StrictMode } from 'react';
+import CardCollection from '../../components/card-collection';
 import LoadCards from '../../components/load-cards';
-import Metadata from '../../components/metadata';
+import LoadMetadata from '../../components/load-metadata';
 import Wrapper from '../../components/wrapper';
-import Locale from '../../constants/locale';
 import TRANSLATIONS from '../../constants/translations';
 import type MetadataType from '../../types/metadata';
+import useApp from './app.hook';
 import './app.scss';
 
 interface Props {
@@ -32,7 +31,7 @@ export default function App({
   fetchSetIndexCardIndexMultiverseIds,
   fetchSetNames,
 }: Props): ReactElement {
-  const [locale] = useState(Locale.English);
+  const { locale } = useApp();
 
   return (
     <StrictMode>
@@ -42,25 +41,26 @@ export default function App({
           locale={locale}
           translations={TRANSLATIONS}
         >
-          <Metadata fetchMetadata={fetchMetadata}>
-            {({
-              // cardKingdomIdsSize,
-              cardNamesSize,
-              date,
-              scryfallIdsSize,
-              setCodesSize,
-              setIndexCardIndexMultiverseIdsSize,
-              setNamesSize,
-            }: // tcgplayerProductIdsSize,
-            MetadataType): ReactElement => (
-              <Wrapper header={<Header lastUpdated={date} />}>
+          <Wrapper>
+            <LoadMetadata fetchMetadata={fetchMetadata}>
+              {({
+                // cardKingdomIdsSize,
+                cardNamesSize,
+                date,
+                scryfallIdsSize,
+                setCodesSize,
+                setIndexCardIndexMultiverseIdsSize,
+                setNamesSize,
+              }: // tcgplayerProductIdsSize,
+              MetadataType): ReactElement => (
                 <LoadCards
-                  Component={CardsCards}
+                  Component={CardCollection}
                   cardNamesSize={cardNamesSize}
                   fetchCardNames={fetchCardNames}
                   fetchScryfallIds={fetchScryfallIds}
                   fetchSetCodes={fetchSetCodes}
                   fetchSetNames={fetchSetNames}
+                  lastUpdated={date}
                   scryfallIdsSize={scryfallIdsSize}
                   setCodesSize={setCodesSize}
                   setNamesSize={setNamesSize}
@@ -71,9 +71,9 @@ export default function App({
                     setIndexCardIndexMultiverseIdsSize
                   }
                 />
-              </Wrapper>
-            )}
-          </Metadata>
+              )}
+            </LoadMetadata>
+          </Wrapper>
         </I18nProvider>
       </AwsuiDarkMode>
     </StrictMode>

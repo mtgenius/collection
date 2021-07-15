@@ -8,7 +8,10 @@ import { useTranslate } from 'lazy-i18n';
 import { useCallback, useMemo, useState } from 'react';
 import { usePagination, useTextFilter } from 'use-awsui';
 import type MagicCard from '../../types/magic-card';
-import useCardDefinition from './cards-cards.hook.card-definition';
+import mapMapToRecord from '../../utils/map-map-to-record';
+import useAddToCollection from './card-collection.hook.add-to-collection';
+import useCardDefinition from './card-collection.hook.card-definition';
+import useSubtractFromCollection from './card-collection.hook.subtract-from-collection';
 
 interface State {
   readonly cardDefinition: CardsProps.CardDefinition<MagicCard>;
@@ -33,11 +36,9 @@ interface State {
 }
 
 const DEFAULT_COLLECTION: Map<number, number> = new Map<number, number>();
-const NONE = 0;
 const PAGE_SIZE = 8;
-const SINGLE = 1;
 
-export default function useCardsCards(cards: readonly MagicCard[]): State {
+export default function useCardCollection(cards: readonly MagicCard[]): State {
   // Contexts
   const translate: TranslateFunction = useTranslate();
 
@@ -81,38 +82,8 @@ export default function useCardsCards(cards: readonly MagicCard[]): State {
 
     cardDefinition: useCardDefinition({
       collection,
-      onAddToCollection: useCallback((multiverseId: number): void => {
-        setCollection(
-          (
-            oldCollection: Readonly<Map<number, number>>,
-          ): Map<number, number> => {
-            const newCollection: Map<number, number> = new Map(oldCollection);
-            const oldCount: number = oldCollection.get(multiverseId) ?? NONE;
-            newCollection.set(multiverseId, oldCount + SINGLE);
-            return newCollection;
-          },
-        );
-      }, []),
-      onSubtractFromCollection: useCallback((multiverseId: number): void => {
-        setCollection(
-          (
-            oldCollection: Readonly<Map<number, number>>,
-          ): Map<number, number> => {
-            const oldCount: number = oldCollection.get(multiverseId) ?? NONE;
-            if (oldCount === NONE) {
-              return oldCollection;
-            }
-
-            const newCollection: Map<number, number> = new Map(oldCollection);
-            if (oldCount === SINGLE) {
-              newCollection.delete(multiverseId);
-            } else {
-              newCollection.set(multiverseId, oldCount - SINGLE);
-            }
-            return newCollection;
-          },
-        );
-      }, []),
+      onAddToCollection: useAddToCollection(setCollection),
+      onSubtractFromCollection: useSubtractFromCollection(setCollection),
     }),
 
     handleClearFilter: useCallback((): void => {
@@ -120,10 +91,7 @@ export default function useCardsCards(cards: readonly MagicCard[]): State {
     }, [setFilteringText]),
 
     handleExport: useCallback((): void => {
-      const newExport: Record<number, number> = {};
-      for (const [multiverseId, count] of collection.entries()) {
-        newExport[multiverseId] = count;
-      }
+      const newExport: Record<number, number> = mapMapToRecord(collection);
       download(
         JSON.stringify(newExport),
         'mtgenius-collection.json',

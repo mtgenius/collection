@@ -13,7 +13,7 @@ interface State {
   readonly metadataState: AsyncState<Metadata>;
 }
 
-export default function useMetadata({ fetchMetadata }: Props): State {
+export default function useLoadMetadata({ fetchMetadata }: Props): State {
   // States
   const [metadataState, initMetadataState] =
     useAsyncState<Metadata>(fetchMetadata);
