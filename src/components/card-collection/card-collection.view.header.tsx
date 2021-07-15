@@ -8,6 +8,7 @@ import I18n from 'lazy-i18n';
 import type { ReactElement } from 'react';
 
 interface Props {
+  readonly isExportDisabled: boolean;
   readonly lastUpdated: string;
   readonly onExport: () => void;
 }
@@ -17,6 +18,7 @@ const TEXT_LABEL_MARGIN: BoxProps.Spacing = {
 };
 
 export default function CardCollectionHeader({
+  isExportDisabled,
   lastUpdated,
   onExport,
 }: Props): ReactElement {
@@ -27,7 +29,11 @@ export default function CardCollectionHeader({
           <Button>
             <I18n>Import</I18n>
           </Button>
-          <Button onClick={onExport} variant="primary">
+          <Button
+            disabled={isExportDisabled}
+            onClick={onExport}
+            variant="primary"
+          >
             <I18n>Export</I18n>
           </Button>
         </SpaceBetween>

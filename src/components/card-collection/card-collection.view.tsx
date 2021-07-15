@@ -26,6 +26,7 @@ export default function CardCollection({
     handleExport,
     handlePaginationChange,
     handleTextFilterChange,
+    isExportDisabled,
     items,
     pagesCount,
     selectedItems,
@@ -35,7 +36,6 @@ export default function CardCollection({
     <Cards
       cardDefinition={cardDefinition}
       empty={<Empty onClearFilter={handleClearFilter} />}
-      header={<Header lastUpdated={lastUpdated} onExport={handleExport} />}
       isItemDisabled={trueFunction}
       items={items}
       selectedItems={selectedItems}
@@ -47,6 +47,13 @@ export default function CardCollection({
           filteringPlaceholder={filteringPlaceholder}
           filteringText={filteringText}
           onChange={handleTextFilterChange}
+        />
+      }
+      header={
+        <Header
+          isExportDisabled={isExportDisabled}
+          lastUpdated={lastUpdated}
+          onExport={handleExport}
         />
       }
       pagination={

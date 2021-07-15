@@ -20,6 +20,7 @@ interface State {
   readonly filteringText: string;
   readonly handleClearFilter: () => void;
   readonly handleExport: () => void;
+  readonly isExportDisabled: boolean;
   readonly items: readonly MagicCard[];
   readonly pagesCount: number;
   readonly selectedItems: readonly MagicCard[];
@@ -36,6 +37,7 @@ interface State {
 }
 
 const DEFAULT_COLLECTION: Map<number, number> = new Map<number, number>();
+const NONE = 0;
 const PAGE_SIZE = 8;
 
 export default function useCardCollection(cards: readonly MagicCard[]): State {
@@ -78,6 +80,7 @@ export default function useCardCollection(cards: readonly MagicCard[]): State {
     filteringText,
     handlePaginationChange,
     handleTextFilterChange,
+    isExportDisabled: collection.size === NONE,
     pagesCount: Math.ceil(filteredItems.length / PAGE_SIZE),
 
     cardDefinition: useCardDefinition({
